@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">LineUpApp</string>
+    <string name="title_activity_display_wait_lists">DisplayWaitListsActivity</string>
+</resources>
