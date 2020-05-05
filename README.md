@@ -14,3 +14,5 @@ Devpost for this project:
 https://devpost.com/software/lineup-xfqb2i 
 
 Note: (Github repository located in devpost contains rough design for app, no source code)
+
+DEMO: In this repository resides a video walkthrough of the application. Feel free to check it out!
