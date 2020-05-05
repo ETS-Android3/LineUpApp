@@ -1,6 +1,7 @@
 package com.example.lineupapp;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.lineupapp.adapters.WaitListeeAdapter;
 import com.example.lineupapp.models.WaitList;
 import com.example.lineupapp.models.WaitListee;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,25 +22,35 @@ import java.util.List;
 public class QueueActivity extends AppCompatActivity {
     List<WaitListee> waitListees = new ArrayList<>();
     WaitListeeAdapter wlvAdapter;
+    WaitListee fullwle = new WaitListee("FULL", "");
     TextView title, hours;
     Button popBtn;
     static String title_String, hours_String;
     ListView lv;
 
-    static boolean gotTitle = false;
+    static boolean gotTitle = false, hideFAB = false, hidePopBtn = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_queue);
         // Set Title to List Name
+        popBtn = findViewById(R.id.delBtn);
         if (gotTitle == false) {
             getListName();
             gotTitle = true;
         }
+        // Hiding floating action button to add waitlistees if waitlist has reached time limit
+        if (hideFAB == true){
+            FloatingActionButton addListeeBtn = findViewById(R.id.addWaitlistee);
+            addListeeBtn.hide();
+        }
+        // Pop button does not appear if no waitlistees exist and the first is full
+        if (hidePopBtn == true){
+            popBtn.setVisibility(View.GONE);
+        }
         // Configuring List View
         lv = findViewById(R.id.wlv);
-        popBtn = findViewById(R.id.delBtn);
         wlvAdapter = new WaitListeeAdapter(this, R.layout.adapter_view_listees_layout, waitListees);
         addAllWaitListees();
         addWaitListee();
@@ -51,6 +63,10 @@ public class QueueActivity extends AppCompatActivity {
                 if (ProfessorActivity.removeListee(title_String, waitListees.get(0))) {
                     Toast.makeText(QueueActivity.this, "Done with " + waitListees.get(0), Toast.LENGTH_SHORT).show();
                     waitListees.remove(0);
+                    if (waitListees.get(0).getName().equals("FULL")){
+                        popBtn.setVisibility(View.GONE);
+                        hidePopBtn = true;
+                    }
                     wlvAdapter.notifyDataSetChanged();
                     System.out.println("Removed");
                 }
@@ -77,8 +93,18 @@ public class QueueActivity extends AppCompatActivity {
                 WaitListee waitListee = new WaitListee(bundle.getString("WAITLISTEE_NAME"), bundle.getString("TIME_NEEDED"));
                 if (ProfessorActivity.addListee(title_String, waitListee)) {
                     waitListees.add(waitListee);
-                    wlvAdapter.notifyDataSetChanged();
                     Toast.makeText(QueueActivity.this, "Added " + waitListees.get(waitListees.size() - 1).getName(), Toast.LENGTH_SHORT).show();
+                    if (bundle.getString("ADDED_TIME") != null || bundle.getString("FINAL_TIME") != null) {
+                        if (bundle.getString("ADDED_TIME").equals(bundle.getString("FINAL_TIME"))) {
+                            System.out.println("added_time: "+bundle.getString("ADDED_TIME")+", final_time: " + bundle.getString("FINAL_TIME"));
+                            waitListees.add(fullwle);
+                            WaitListeeAdapter.getTvName().setTextColor(Color.RED); // Redundant currently
+                            FloatingActionButton addListeeBtn = findViewById(R.id.addWaitlistee);
+                            addListeeBtn.hide();
+                            hideFAB = true;
+                        }
+                    }
+                    wlvAdapter.notifyDataSetChanged();
                 }
             }
         }
@@ -100,6 +126,11 @@ public class QueueActivity extends AppCompatActivity {
                 }
                 break;
             }
+        }
+        if (hidePopBtn == true){
+            waitListees.add(fullwle);
+            WaitListeeAdapter.getTvName().setTextColor(Color.RED); // Redundant currently
+            wlvAdapter.notifyDataSetChanged();
         }
     }
 

@@ -55,10 +55,13 @@ public class AddWaitListeeActivity extends AppCompatActivity {
                     } else {
                         timeStr = time + " to " + addedTime + "";
                         addedTimeStr = addedTime + "";
+                        String finalTimeStr = ""+finalTime;
                         wl.setNextAvailTime(addedTimeStr);
                         Intent intent = new Intent(this, QueueActivity.class);
                         intent.putExtra("WAITLISTEE_NAME", etName.getText().toString());
                         intent.putExtra("TIME_NEEDED", timeStr);
+                        intent.putExtra("FINAL_TIME", finalTimeStr);
+                        intent.putExtra("ADDED_TIME", addedTimeStr);
                         startActivity(intent);
                     }
                 } catch (DateTimeParseException e) {

@@ -97,8 +97,8 @@ public class ProfessorActivity extends AppCompatActivity {
 //        });
     }
 
-    public void onDelListClickListener(View view){
-        System.out.println("Hi");
+    public void onDelListClickListener(View view) {
+        Toast.makeText(ProfessorActivity.this, "Feature not supported yet", Toast.LENGTH_SHORT).show();
 //        WaitList waitList = (WaitList) mParent.getItemAtPosition(mPosition);
 //        System.out.println("waitList in del: " + waitList);
 //        for (WaitList wl : waitLists){
@@ -112,16 +112,16 @@ public class ProfessorActivity extends AppCompatActivity {
 //        }
     }
 
-    public static List<WaitList> getWaitLists(){
+    public static List<WaitList> getWaitLists() {
         List<WaitList> wlClone = new ArrayList<WaitList>();
         wlClone.addAll(waitLists);
         return wlClone;
     }
 
-    public static boolean addListee(String listName, WaitListee waitListee){
-        System.out.println("Trying to find waitlist: "+listName);
-        for (WaitList wl : waitLists){
-            if (listName.equals(wl.getName())){
+    public static boolean addListee(String listName, WaitListee waitListee) {
+        System.out.println("Trying to find waitlist: " + listName);
+        for (WaitList wl : waitLists) {
+            if (listName.equals(wl.getName())) {
                 wl.addWaitListee(waitListee);
                 return true;
             }
@@ -130,9 +130,9 @@ public class ProfessorActivity extends AppCompatActivity {
         return false;
     }
 
-    public static boolean removeListee(String listName, WaitListee waitListee){
-        for (WaitList wl : waitLists){
-            if (listName.equals(wl.getName())){
+    public static boolean removeListee(String listName, WaitListee waitListee) {
+        for (WaitList wl : waitLists) {
+            if (listName.equals(wl.getName())) {
                 wl.removeWaitListee(waitListee);
                 return true;
             }
