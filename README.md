@@ -1,4 +1,6 @@
 # LineUpApp
+Started at: HackTheValley4
+Credits to my hackathon partners: Jason, Chris, Jaleel, Frank
 An app that creates wait lists.
 
 Current details that need to be fixed/added:
@@ -11,4 +13,4 @@ Current details that need to be fixed/added:
 Devpost for this project:
 https://devpost.com/software/lineup-xfqb2i 
 
-Note: (Github repository located in devpost contains rough design for app)
+Note: (Github repository located in devpost contains rough design for app, no source code)
