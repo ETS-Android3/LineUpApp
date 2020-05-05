@@ -17,4 +17,7 @@ https://devpost.com/software/lineup-xfqb2i
 
 Note: (Github repository located in devpost contains rough design for app, no source code)
 
-DEMO: In this repository resides a video walkthrough of the application. Feel free to check it out!
+DEMO: 
+Youtube Video Demo: https://www.youtube.com/watch?v=7ku_A0lB2co
+Or in this repository resides a video walkthrough of the application. Feel free to check it out!
+ 
