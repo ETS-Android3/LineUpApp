@@ -3,15 +3,16 @@ package com.example.lineupapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.lineupapp.adapters.WaitListeeAdapter;
 import com.example.lineupapp.models.WaitList;
 import com.example.lineupapp.models.WaitListee;
-import com.example.lineupapp.adapters.WaitListeeAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,7 @@ public class QueueActivity extends AppCompatActivity {
     List<WaitListee> waitListees = new ArrayList<>();
     WaitListeeAdapter wlvAdapter;
     TextView title, hours;
+    Button popBtn;
     static String title_String, hours_String;
     ListView lv;
 
@@ -35,30 +37,24 @@ public class QueueActivity extends AppCompatActivity {
             gotTitle = true;
         }
         // Configuring List View
-        lv = (ListView) findViewById(R.id.wlv);
+        lv = findViewById(R.id.wlv);
+        popBtn = findViewById(R.id.delBtn);
         wlvAdapter = new WaitListeeAdapter(this, R.layout.adapter_view_listees_layout, waitListees);
         addAllWaitListees();
         addWaitListee();
         lv.setAdapter(wlvAdapter);
 
-        // Remove Listee when clicking on delete button
-        this.wlvAdapter.setOnDelClickListener(new View.OnClickListener() {
+        // Pop first waitListee
+        popBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                WaitListee currentwle = new WaitListee(WaitListeeAdapter.getTvName().getText().toString(), WaitListeeAdapter.getTvTime().getText().toString());
-                System.out.println("currentwle: " + currentwle);
-                if (ProfessorActivity.removeListee(title_String, currentwle)){
-                    Toast.makeText(QueueActivity.this, "Done with " + currentwle.getName(), Toast.LENGTH_SHORT).show();
-                    for (WaitListee wle : waitListees){
-                        if (currentwle.getName().equals(wle.getName()) && currentwle.getTimeNeeded().equals(wle.getTimeNeeded())) {
-                            System.out.println("currentwle matched in waitListees (QueueActivitiy). Proceeding to delete.");
-                            waitListees.remove(wle);
-                            wlvAdapter.notifyDataSetChanged();
-                        }
-                    }
+                if (ProfessorActivity.removeListee(title_String, waitListees.get(0))) {
+                    Toast.makeText(QueueActivity.this, "Done with " + waitListees.get(0), Toast.LENGTH_SHORT).show();
+                    waitListees.remove(0);
+                    wlvAdapter.notifyDataSetChanged();
+                    System.out.println("Removed");
                 }
             }
-
         });
     }
 
@@ -75,7 +71,6 @@ public class QueueActivity extends AppCompatActivity {
     }
 
     public void addWaitListee() {
-        System.out.println("Add Waitlistee");
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             if (bundle.getString("WAITLISTEE_NAME") != null || bundle.getString("TIME_NEEDED") != null) {
@@ -117,7 +112,7 @@ public class QueueActivity extends AppCompatActivity {
             hours.setText(hours_String);
             title.setText(bundle.getString("LIST_NAME"));
             title_String = title.getText().toString();
-            System.out.println("Title: "+title_String);
+            System.out.println("Title: " + title_String);
         }
     }
 }
