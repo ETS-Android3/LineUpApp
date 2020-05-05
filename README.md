@@ -1,6 +1,8 @@
 # LineUpApp
 Started at: HackTheValley4
+
 Credits to my hackathon partners: Jason, Chris, Jaleel, Frank
+
 An app that creates wait lists.
 
 Current details that need to be fixed/added:
