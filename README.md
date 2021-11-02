@@ -19,7 +19,7 @@ Note: (Github repository located in devpost contains a rough design for app, no 
 
 ### DEMO 
 Youtube Video Demo: https://www.youtube.com/watch?v=7ku_A0lB2co
-Or in this repository resides a video walkthrough of the application. Feel free to check it out!
+Feel free to check it out!
 
 # General Description
 
