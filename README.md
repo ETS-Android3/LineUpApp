@@ -1,7 +1,8 @@
 # LineUpApp - An app that creates waitlists
 
 # TLDR
-* This project was started at the hackathon called HackTheValley4 and it was one of my first ever Android application
+* A hackathon (HackTheValley4) project
+* One of my first ever Android applications
 * Utilized **Java** & **XML** within the **Android Studio IDE**
 * This application creates wait lists used by professors that would be able to manage their office hours
 * Credits to my hackathon partners: Jason, Chris, Jaleel, Frank
@@ -26,7 +27,6 @@ Feel free to check it out!
 This project was attempted at a Hackathon called HackTheValley4 where my partners and I spent a good portion of 2 days to ideate, prototype and implement this application. The idea entailed an application -- later established as a mobile Android app -- which would aid the professors in structuring and waitlisting their office hours. Instead of students waiting in line and potentially wasting precious time that they could've spent studying, they could book a slot with the professor ahead of time, thus provding the professor some organizational leeway in addition to the students.
 
 As a team during the hackathon, we put together a prototype as well as an attempt at an Android app (to which the original github repository and protoypes are linked to this readme), although unfortunately my programming skills weren't as adept back then as they are now so we couldn't finish the implementation. It was a few months after the hackathon had completed that I had decided to take a second crack at the project, and this github repository is a consequence of that effort.
-
  
 ### Built with
 * Java
